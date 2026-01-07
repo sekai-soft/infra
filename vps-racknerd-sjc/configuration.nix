@@ -36,9 +36,6 @@ in
     virtualHosts."miniflux.${privateBaseDomain}".extraConfig = ''
       reverse_proxy http://miniflux:8080
     '';
-    virtualHosts."rsshub.ktachibana.party".extraConfig = ''
-      reverse_proxy http://rsshub:1200
-    '';
     virtualHosts."rsshub.${privateBaseDomain}".extraConfig = ''
       reverse_proxy http://rsshub-private:1200
     '';

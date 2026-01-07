@@ -27,6 +27,12 @@ in
   # Server specific
   ###
   networking.hostName = vars.hostname;
+  services.caddy = {
+    enable = true;
+    virtualHosts."rsshub.ktachibana.party".extraConfig = ''
+      reverse_proxy http://rsshub:1200
+    '';
+  };
   services.cron.systemCronJobs = [
     "0 0 1 * * nixos /home/nixos/mastodon-cleanup/main.sh"
     "0 0 1 * * nixos /home/nixos/backup-configs/main.sh"
