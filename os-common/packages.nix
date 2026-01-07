@@ -9,6 +9,7 @@
     nano
     rsync
     tmux
+    vim
     wget
   ];
 

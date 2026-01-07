@@ -2,6 +2,8 @@
 # Example:
 # /etc/nixos/configuration.nix
 /home/nixos/env-backup
+/home/nixos/env-tailscale
+/home/nixos/private-base-domain.txt
 /home/nixos/miniflux/env
 /home/nixos/miniflux/env-backup
 /home/nixos/rsshub/env
