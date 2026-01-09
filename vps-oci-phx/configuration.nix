@@ -32,6 +32,48 @@ in
     virtualHosts."rsshub.ktachibana.party".extraConfig = ''
       reverse_proxy http://rsshub:1200
     '';
+    virtualHosts."files.mastodon.ktachibana.party".extraConfig = ''
+      root * /var/www/html
+
+      @local file {
+        try_files {path} {path}/ /index.html
+      }
+      handle @local {
+        file_server {
+          index index.html
+        }
+      }
+
+      handle {
+        @notGet {
+          not method GET
+        }
+        respond @notGet 403
+
+        reverse_proxy https://YOUR_BUCKET_NAME.YOUR_S3_HOSTNAME {
+          header_up Host YOUR_BUCKET_NAME.YOUR_S3_HOSTNAME
+          header_up Connection ""
+          header_up Authorization ""
+          header_down -Set-Cookie
+          header_down -Access-Control-Allow-Origin
+          header_down -Access-Control-Allow-Methods
+          header_down -Access-Control-Allow-Headers
+          header_down -x-amz-id-2
+          header_down -x-amz-request-id
+          header_down -x-amz-meta-server-side-encryption
+          header_down -x-amz-server-side-encryption
+          header_down -x-amz-bucket-region
+          header_down -x-amzn-requestid
+        }
+
+        header {
+          Cache-Control "public, max-age=31536000"
+          Access-Control-Allow-Origin "*"
+          X-Content-Type-Options "nosniff"
+          Content-Security-Policy "default-src 'none'; form-action 'none'"
+        }
+      }
+    '';
   };
   services.cron.systemCronJobs = [
     "0 0 1 * * nixos /home/nixos/mastodon-cleanup/main.sh"
