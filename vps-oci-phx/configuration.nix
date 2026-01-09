@@ -74,7 +74,8 @@ in
         }
       }
     '';
-    virtualHosts."streaming.mastodon.ktachibana.party".extraConfig = ''
+    # NOTICE: wss for some reason cannot be longer than second-level domain, e.g. it cannot be streaming.mastodon.*
+    virtualHosts."mastodon-streaming.ktachibana.party".extraConfig = ''
       reverse_proxy http://mastodon-streaming:4000
     '';
   };
