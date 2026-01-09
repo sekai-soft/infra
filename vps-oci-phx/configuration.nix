@@ -75,8 +75,11 @@ in
       }
     '';
     # NOTICE: wss for some reason cannot be longer than second-level domain, e.g. it cannot be streaming.mastodon.*
-    virtualHosts."mastodon-streaming.ktachibana.party".extraConfig = ''
-      reverse_proxy http://mastodon-streaming:4000
+    virtualHosts."streaming.mastodon.ktachibana.party".extraConfig = ''
+      reverse_proxy http://mastodon-streaming:4000 {
+        header_up Connection {http.request.header.Connection}
+        header_up Upgrade {http.request.header.Upgrade}
+      }
     '';
   };
   services.cron.systemCronJobs = [
