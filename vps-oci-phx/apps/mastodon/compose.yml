@@ -138,12 +138,21 @@ services:
     labels:
       - com.centurylinklabs.watchtower.enable=true
 
-  cloudflared-streaming:
-    image: cloudflare/cloudflared
+  streaming-ts:
+    image: tailscale/tailscale:latest
     restart: unless-stopped
-    command: tunnel run mastodon-streaming
+    hostname: mastodon-streaming
+    environment:
+      - TS_EXTRA_ARGS=--advertise-tags=tag:server
+      - TS_STATE_DIR=/var/lib/tailscale
     env_file:
-      - env-cloudflared-streaming
+      - /home/nixos/env-tailscale
+    volumes:
+      - streaming-ts:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
+      - sys_module
     labels:
       - com.centurylinklabs.watchtower.enable=true
 
@@ -166,3 +175,6 @@ services:
 #   external_network:
 #   internal_network:
 #     internal: true
+
+volumes:
+  streaming-ts:

@@ -74,6 +74,9 @@ in
         }
       }
     '';
+    virtualHosts."streaming.mastodon.ktachibana.party".extraConfig = ''
+      reverse_proxy http://mastodon-streaming:4000
+    '';
   };
   services.cron.systemCronJobs = [
     "0 0 1 * * nixos /home/nixos/mastodon-cleanup/main.sh"
