@@ -50,8 +50,8 @@ in
         }
         respond @notGet 403
 
-        reverse_proxy https://YOUR_BUCKET_NAME.YOUR_S3_HOSTNAME {
-          header_up Host YOUR_BUCKET_NAME.YOUR_S3_HOSTNAME
+        reverse_proxy http://mastodon-s3.ktachibana.party.s3.us-west-1.wasabisys.com {
+          header_up Host mastodon-s3.ktachibana.party.s3.us-west-1.wasabisys.com
           header_up Connection ""
           header_up Authorization ""
           header_down -Set-Cookie
