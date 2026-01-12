@@ -86,6 +86,9 @@ in
     virtualHosts."rss-lambda.xyz".extraConfig = ''
       reverse_proxy http://rss-lambda:5000
     '';
+    virtualHosts."github-org-actions.sekaisoft.tech".extraConfig = ''
+      reverse_proxy http://github-org-actions:8080
+    '';
   };
   services.cron.systemCronJobs = [
     "0 0 1 * * nixos /home/nixos/mastodon-cleanup/main.sh"

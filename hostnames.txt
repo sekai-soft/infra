@@ -1,3 +1,2 @@
 gibraltar vps-oci-phx
 numbani vps-racknerd-sjc
-eichenwalde vps-servitro-fra

@@ -53,27 +53,3 @@ jobs:
       - name: Run jobs-apply
         run: |
           ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "nixos@numbani" "bash /home/nixos/jbos/jobs-apply"
-
-  deploy-eichenwalde:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-    steps:
-      - name: Setup Tailscale
-        uses: tailscale/github-action@v3
-        with:
-          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
-          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
-          tags: tag:ops
-
-      - name: Pull repo
-        run: |
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "root@eichenwalde" "cd /root/jbos && git checkout -- . && git fetch origin && git checkout ${{ github.sha }}"
-      - name: Run os-apply
-        run: |
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "root@eichenwalde" "bash /root/jbos/os-apply-ubuntu-24-root"
-      - name: Run apps-apply
-        run: |
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "root@eichenwalde" "HOME_DIR=/root bash /root/jbos/apps-apply"
-      - name: Run jobs-apply
-        run: |
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "root@eichenwalde" "HOME_DIR=/root bash /root/jbos/jobs-apply"
