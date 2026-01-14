@@ -38,6 +38,9 @@ in
     virtualHosts."rsshub.${privateBaseDomain}".extraConfig = ''
       reverse_proxy http://rsshub-private:1200
     '';
+    virtualHosts."navidrome.${privateBaseDomain}".extraConfig = ''
+      reverse_proxy http://navidrome:80
+    '';
   };
   services.cron.systemCronJobs = [
     "0 0 1 * * nixos /home/nixos/backup-configs/main.sh"
