@@ -19,16 +19,16 @@ jobs:
 
       - name: Pull repo
         run: |
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "nixos@gibraltar" "cd /home/nixos/jbos && git checkout -- . && git fetch origin && git checkout ${{ github.sha }}"
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "nixos@gibraltar" "cd /home/nixos/infra && git checkout -- . && git fetch origin && git checkout ${{ github.sha }}"
       - name: Run os-apply
         run: |
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "nixos@gibraltar" "bash /home/nixos/jbos/os-apply"
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "nixos@gibraltar" "bash /home/nixos/infra/os-apply"
       - name: Run apps-apply
         run: |
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "nixos@gibraltar" "bash /home/nixos/jbos/apps-apply"
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "nixos@gibraltar" "bash /home/nixos/infra/apps-apply"
       - name: Run jobs-apply
         run: |
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "nixos@gibraltar" "bash /home/nixos/jbos/jobs-apply"
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "nixos@gibraltar" "bash /home/nixos/infra/jobs-apply"
 
   deploy-numbani:
     runs-on: ubuntu-latest
@@ -43,13 +43,13 @@ jobs:
 
       - name: Pull repo
         run: |
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "nixos@numbani" "cd /home/nixos/jbos && git checkout -- . && git fetch origin && git checkout ${{ github.sha }}"
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "nixos@numbani" "cd /home/nixos/infra && git checkout -- . && git fetch origin && git checkout ${{ github.sha }}"
       - name: Run os-apply
         run: |
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "nixos@numbani" "bash /home/nixos/jbos/os-apply"
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "nixos@numbani" "bash /home/nixos/infra/os-apply"
       - name: Run apps-apply
         run: |
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "nixos@numbani" "bash /home/nixos/jbos/apps-apply"
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "nixos@numbani" "bash /home/nixos/infra/apps-apply"
       - name: Run jobs-apply
         run: |
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "nixos@numbani" "bash /home/nixos/jbos/jobs-apply"
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "nixos@numbani" "bash /home/nixos/infra/jobs-apply"

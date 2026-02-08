@@ -49,7 +49,7 @@ deploy_apps_from_dir() {
 }
 
 # Deploy apps
-APPS_DIR="$CONFIG_PATH/apps"
+APPS_DIR="$HOSTNAME/apps"
 COMMON_APPS_DIR="$SCRIPT_DIR/apps-common"
 
 if [ -d "$APPS_DIR" ]; then

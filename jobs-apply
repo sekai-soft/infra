@@ -41,7 +41,7 @@ deploy_jobs_from_dir() {
 }
 
 # Deploy jobs
-JOBS_DIR="$CONFIG_PATH/jobs"
+JOBS_DIR="$HOSTNAME/jobs"
 COMMON_JOBS_DIR="$SCRIPT_DIR/jobs-common"
 
 if [ -d "$JOBS_DIR" ]; then
