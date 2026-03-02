@@ -4,6 +4,9 @@ let
   vars = import ./os-etc/vars.nix;
   privateBaseDomain =
     lib.strings.removeSuffix "\n" (lib.fileContents /home/nixos/private-base-domain.txt);
+  unstable = import (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") {
+    config = config.nixpkgs.config;
+  };
 in
 {
   ###
@@ -20,8 +23,16 @@ in
     ../os-common/packages.nix
     ../os-common/shell.nix
     (import ../os-common/users.nix ./os-etc/vars.nix)
-    ../os-common/services.nix
   ];
+
+  ###
+  # Services
+  # TODO: don't know to to tailscale unstable properly yet :(
+  ###
+  services.tailscale = {
+    enable = true;
+    package = unstable.tailscale;
+  };
 
   ###
   # Server specific

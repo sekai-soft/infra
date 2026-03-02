@@ -21,10 +21,18 @@ in
     ../os-common/packages.nix
     ../os-common/shell.nix
     (import ../os-common/users.nix ./os-etc/vars.nix)
-    ../os-common/services.nix
     "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/v1.11.0.tar.gz"}/module.nix"
     ./os-etc/disk-config.nix
   ];
+
+  ###
+  # Services
+  # TODO: don't know to to tailscale unstable properly yet :(
+  ###
+  services.tailscale = {
+    enable = true;
+    package = unstable.tailscale;
+  };
 
   ###
   # Server specific
