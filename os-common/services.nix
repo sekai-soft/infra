@@ -1,10 +1,8 @@
 { ... }:
 
 {
-  services.tailscale.enable = true;
-
-  services.cron = {
+  services.tailscale = {
     enable = true;
-    systemCronJobs = [ ];
+    package = unstable.tailscale;
   };
 }

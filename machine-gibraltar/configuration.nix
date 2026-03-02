@@ -2,6 +2,9 @@
 
 let
   vars = import ./os-etc/vars.nix;
+  unstable = import (builtins.fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") {
+    config = config.nixpkgs.config;
+  };
 in
 {
   ###
