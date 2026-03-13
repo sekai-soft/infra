@@ -44,7 +44,7 @@ in
       reverse_proxy http://pigeon-pod:8080
     '';
     virtualHosts."miniflux.${privateBaseDomain}".extraConfig = ''
-      reverse_proxy http://miniflux:8080
+      reverse_proxy http://miniflux-private:8080
     '';
     virtualHosts."rsshub.${privateBaseDomain}".extraConfig = ''
       reverse_proxy http://rsshub-private:1200

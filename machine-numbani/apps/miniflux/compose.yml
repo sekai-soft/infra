@@ -51,7 +51,7 @@ services:
   miniflux-ts:
     image: tailscale/tailscale:latest
     restart: unless-stopped
-    hostname: miniflux
+    hostname: miniflux-private
     environment:
       - TS_EXTRA_ARGS=--advertise-tags=tag:server
       - TS_STATE_DIR=/var/lib/tailscale
