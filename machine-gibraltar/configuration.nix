@@ -103,6 +103,9 @@ in
     virtualHosts."status.sekaisoft.tech".extraConfig = ''
       reverse_proxy http://uptime-kuma-sekaisoft:80
     '';
+    virtualHosts."api.pill.city".extraConfig = ''
+      reverse_proxy http://pill-city:5000
+    '';
   };
   services.cron.systemCronJobs = [
     "0 0 1 * * nixos /home/nixos/mastodon-cleanup/main.sh"
